@@ -1,4 +1,4 @@
-import { Controller, Get } from '@nestjs/common';
+import { Controller, Get, Param } from '@nestjs/common';
 import { NameService } from './services/name.service';
 import { GreetingService } from './services/greeting.service';
 
@@ -12,5 +12,10 @@ export class AppController {
   @Get()
   getHello(): string {
     return `${this.greeting.getGreeting()} ${this.name.getName()}!`;
+  }
+
+  @Get(':name')
+  getSpecificHello(@Param('name') name: string): string {
+    return `${this.greeting.getGreeting()} ${name}`;
   }
 }
